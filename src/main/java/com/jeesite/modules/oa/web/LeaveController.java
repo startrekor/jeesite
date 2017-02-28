@@ -35,6 +35,7 @@ import com.jeesite.modules.sys.utils.UserUtils;
 
 /**
  * 请假Controller
+ * 
  * @author liuj
  * @version 2013-04-05
  */
@@ -54,7 +55,7 @@ public class LeaveController extends BaseController {
 	protected TaskService taskService;
 
 	@RequiresPermissions("oa:leave:view")
-	@RequestMapping(value = {"form"})
+	@RequestMapping(value = { "form" })
 	public String form(Leave leave, Model model) {
 		model.addAttribute("leave", leave);
 		return "modules/oa/leaveForm";
@@ -62,7 +63,8 @@ public class LeaveController extends BaseController {
 
 	/**
 	 * 启动请假流程
-	 * @param leave	
+	 * 
+	 * @param leave
 	 */
 	@RequiresPermissions("oa:leave:edit")
 	@RequestMapping(value = "save", method = RequestMethod.POST)
@@ -80,12 +82,13 @@ public class LeaveController extends BaseController {
 
 	/**
 	 * 任务列表
-	 * @param leave	
+	 * 
+	 * @param leave
 	 */
 	@RequiresPermissions("oa:leave:view")
-	@RequestMapping(value = {"list/task",""})
+	@RequestMapping(value = { "list/task", "" })
 	public String taskList(HttpSession session, Model model) {
-		String userId = UserUtils.getUser().getLoginName();//ObjectUtils.toString(UserUtils.getUser().getId());
+		String userId = UserUtils.getUser().getLoginName();// ObjectUtils.toString(UserUtils.getUser().getId());
 		List<Leave> results = leaveService.findTodoTasks(userId);
 		model.addAttribute("leaves", results);
 		return "modules/oa/leaveTask";
@@ -93,18 +96,20 @@ public class LeaveController extends BaseController {
 
 	/**
 	 * 读取所有流程
+	 * 
 	 * @return
 	 */
 	@RequiresPermissions("oa:leave:view")
-	@RequestMapping(value = {"list"})
+	@RequestMapping(value = { "list" })
 	public String list(Leave leave, HttpServletRequest request, HttpServletResponse response, Model model) {
-        Page<Leave> page = leaveService.find(new Page<Leave>(request, response), leave); 
-        model.addAttribute("page", page);
+		Page<Leave> page = leaveService.find(new Page<Leave>(request, response), leave);
+		model.addAttribute("page", page);
 		return "modules/oa/leaveList";
 	}
-	
+
 	/**
 	 * 读取详细数据
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -117,6 +122,7 @@ public class LeaveController extends BaseController {
 
 	/**
 	 * 读取详细数据
+	 * 
 	 * @param id
 	 * @return
 	 */
